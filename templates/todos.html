@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="utf-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <meta name="description" content="">
+     <meta name="author" content="">
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.1.1/sweetalert2.min.css" rel="stylesheet" type="text/css">
+     <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+     <script  src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.1.1/sweetalert2.min.js"></script>
+     <title>{{ title }}</title>
+ </head>
+
+ <body>
+   <div class="todo_app">
+    <div id="title"><h1>{{ title }}</h1></div>
+    <div id="parent_list" style="height-min: 175px; overflow-y: scroll; border: solid 0.5px grey;">
+      <ul id="todo_list">
+      </ul>
+    </div>
+    <div id="footer_list">
+      <p id="count_items" style="float: left;"></p>
+      <p id="add_task" style="text-align: center; float: right;"><img src="/static/img/add.png"><button>Add a new task</button></p>
+    </div>
+    <div id="info_status" style="clear: both;">
+      <p style="font-size: 10.5px;"><span><i>Name: </i></span>
+      <span id="name">UNKNOWN</span><br/>
+      <span><i>Status: </i></span>
+      <span id="status">disconnected</span>
+      <button id="connect_btn">Connect</button>
+  		<br><br>
+      <button id="dispay_log"><i>Display logs</i></button>
+    <div id="parent_log" style="display: none;">
+      <span id="log"></span>
+    </div>
+	</div>
+ </div>
+ </body>
+ <script  src="/static/js/app.js"></script>
+ <script  src="/static/js/notifier.js"></script>
+ <script>
+ (function(){
+   UI_handler.init();
+ })();
+ </script>
+ </html>
