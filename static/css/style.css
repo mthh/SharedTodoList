@@ -28,9 +28,43 @@ li {
   background-color: #ffffff80;
 }
 
+#task_content {
+	font-size: 18px;
+	margin: auto;
+}
+
 #todo_list {
 	list-style: none;
 }
+
+#count_items {
+	float: left;
+	margin: 10px 20px;
+}
+
+#sort_choice {
+	margin-left: 100px;
+	float: left;
+}
+
+.sort_option {
+	color: inherit;
+	margin: 3px;
+	padding: 3px 7px;
+	text-decoration: none;
+	border: 0;
+}
+
+.sort_option.selected {
+	border: 1px solid grey;
+	border-radius: 3px;
+}
+
+.sort_option:hover {
+	border: 0.5px solid lightgrey;
+	border-radius: 3px;
+}
+
 .info {
 		padding: 6px 8px;
 		font: 14px/16px Arial, Helvetica, sans-serif;
@@ -60,6 +94,7 @@ li {
 
 #todo_list > li .toggle {
 	text-align: center;
+	float: left;
 	width: 40px;
 	/* auto, since non-WebKit browsers doesn't support input styling */
 	height: auto;

@@ -18,7 +18,6 @@ var UI_handler = {
   init: function(){
     let self = this;
     document.getElementById('parent_list').style.height = window.innerHeight * 0.6 + "px";
-    // document.getElementById('parent_list').style.width = window.innerWidth * 0.7 + "px";
     document.getElementById("add_task").onclick = ask_add_item;
     this.control = document.getElementById('log');
     this.status_p = document.getElementById('status');
@@ -61,7 +60,15 @@ var UI_handler = {
         }, dismiss => {
             console.log(dismiss);
         });
-  }
+  },
+  display_notification: function(message){
+    if(!this.cancel_next_notification)
+      Notifier.info(message, "");
+    else {
+      this.cancel_next_notification = false;
+    }
+  },
+  cancel_next_notification: false
 }
 
 var WS_handler = {
@@ -78,6 +85,7 @@ var WS_handler = {
           console.log(err2)
         };
     }
+    UI_handler.cancel_next_notification = true;
     UI_handler.log('Connecting...');
     this.conn.onopen = function() {
         UI_handler.log('Connected.');
@@ -93,7 +101,7 @@ var WS_handler = {
                 request_list();
                 break;
             case 'change_list':
-                Notifier.info("Todo list updated", "");
+                UI_handler.display_notification("Todo list updated");
                 let new_list = data.todo_list;
                 UI_handler.log('Refresh todolist');
                 UI_handler.update_ui();
@@ -150,10 +158,9 @@ function update_list(new_list){
           item_list = new_list[key],
           li_elem = document.createElement("li");
       li_elem.id = key;
-      li_elem.innerHTML = '<input class="toggle" type="checkbox">' +
-                          '<span style="font-size:8.5px;"><em>' + item_list.date_added + ", " + item_list.author +
-                          " authored : </em></span>" + '<span id="task_content"><b>' + item_list.description + '</b></span>' +
-                          '<span class="destroy"></span>';
+      li_elem.innerHTML = '<input class="toggle" type="checkbox"><span class="destroy"></span>' +
+                          '<p id="task_content"><b>' + item_list.description + '</b></p>' +
+                          '<p style="font-size:8.5px;"><em>' + item_list.author + ", " + item_list.date_added + "</em></p>";
       li_elem.querySelector(".destroy").onclick = function(){
         remove_item_list(this.parentElement.id, item_list.description);
       }
